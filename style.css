@@ -1,163 +1,253 @@
-body{
-    margin: 0px;
+/* Reset básico */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
-h1{
-    font-size: 24px;
-    font-weight: 900px;
-    color: #f9faf8;
-    
-}
-.header{
-    background-color: #1f2937;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 300px;
-    
-}
-ul{
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    list-style-type: none;
-}
-.links{
-    color: grey;
-    text-decoration-line: none;
-    
-}
-.top-header{
-    display: flex;
-    justify-content: space-between;
-    gap: 1000px;
-}
-.imagen{
-    width: 250;
-    height: 200px;
-}
-.downheader{
-    display: flex;
-    justify-items: center;
-    gap: 550px;
-    
-}   
-h2{
-    font-size: 48px;
-    font-weight: 900px;
-    color: #f9faf8;
-    margin-bottom: 0px;
-    
-    
-}
-.para1{
-    margin-top: 0px; 
-    font-size: 18px;
-    margin-bottom: 0px;
-    color: #e5e7eb;
-    
-}
-.para2{
-    margin-top: 0px; 
-    font-size: 18px;
-    color: #e5e7eb;
-    
-}
-.leftdown{
-    display: flex;
-    flex-direction: column;
 
-   
-    margin: auto;
-   
+/* Header */
+.header {
+    background-color: #1f2937;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.log{
+
+.top-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #f9faf8;
+    margin: 0;
+}
+
+ul {
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.downheader {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.leftdown {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #f9faf8;
+    margin-bottom: 10px;
+}
+
+.para1, .para2 {
+    font-size: 18px;
+    color: #e5e7eb;
+    margin: 10px 0;
+}
+
+.log {
     background-color: #3882f6;
     color: white;
-    ;
-    
-
+    border-radius: 10px;
+    border: none;
+    padding: 8px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
 }
-h3{
+
+.imagen {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+/* Sección de fotos */
+h3 {
     font-size: 36px;
     color: #1f2937;
-    font-weight: 900px;
-    text-align:  center;
+    font-weight: 900;
+    text-align: center;
+    margin: 40px 0;
 }
-button{
-    height: 40px;
-    width: 100px;
-    align-self: center;
+
+.fotos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-.kurtImg{
-    
+
+.kurtImg {
     height: 200px;
     width: 200px;
+    border: 3px solid #3882f6;
+    border-radius: 10px;
+    object-fit: cover;
 }
-.fotos{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-evenly;
-}
-.quotes{
-    display: flex;
-    background-color: #e5e7eb;
-    height: 300px;
-    flex-direction: column;
 
-    justify-content: center;
-    
-  
+/* Sección de citas */
+.quotes {
+    background-color: #e5e7eb;
+    padding: 80px 20px;
+    margin-top: 80px;
 }
-.shiti{
-    display: flex;
+
+.shiti {
     font-size: 36px;
     color: #1f2937;
     text-align: center;
-    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    font-style: italic;
+    font-weight: 300;
+}
 
+.quotesAuthor {
+    text-align: right;
+    font-weight: bold;
+    font-size: 24px;
+    max-width: 800px;
+    margin: 20px auto 0;
 }
-.quotesAuthor{
-    text-align: center;
-}
-.whiteBackground{
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.containerSub{
-    height: 100px;
-    background-color: #3882f6;
-    width: 1250px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 
+/* Sección de suscripción */
+.whiteBackground {
+    padding: 80px 20px;
 }
-h4{
-    color: white;
-    margin-bottom: 0px;
-}
-.Pclass{
-    color: white;
-    margin-top: 0px;
-}
-.Btn2{
-    color: white;
+
+.containerSub {
     background-color: #3882f6;
     border-radius: 10px;
-    border: 1px solid white
-}
-.Bottom{
-    background-color: #1f2937;
-    height: 90px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
+    gap: 20px;
 }
-.Pbottom{
+
+h4 {
+    color: white;
+    margin: 0;
+    font-size: 24px;
+}
+
+.Pclass {
+    color: white;
+    margin: 5px 0 0;
+}
+
+.Btn2 {
+    color: white;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 8px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Footer */
+.Bottom {
+    background-color: #1f2937;
+    padding: 30px 20px;
+}
+
+.Pbottom {
     text-align: center;
     color: white;
+    margin: 0;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 36px;
+    }
+    
+    .downheader {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .leftdown {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .shiti {
+        font-size: 28px;
+    }
+    
+    .containerSub {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 28px;
+    }
+    
+    h3 {
+        font-size: 28px;
+    }
+    
+    .top-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .kurtImg {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .shiti {
+        font-size: 22px;
+    }
 }
