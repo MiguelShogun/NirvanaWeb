@@ -1,84 +1,925 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PuertoAlegre - Tienda de Alimentos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0059b3;
+      --secondary-color: #003366;
+      --accent-color: #ffd700;
+      --light-bg: #f8faff;
+      --dark-text: #2d3748;
+      --light-text: #f8fafc;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent-color);
+    }
+    
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #fff 0%, var(--accent-color) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    nav a, nav .btn {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    nav a:hover, nav .btn:hover {
+      color: var(--accent-color);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      transition: var(--transition);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .hero {
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+      color: var(--light-text);
+      padding: 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow);
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--light-text);
+      margin-left: 1rem;
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--light-text);
+      color: var(--primary-color);
+    }
+    
+    .btn-accent {
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+    }
+    
+    .btn-accent:hover {
+      background-color: #e6c200;
+    }
+    
+    .product {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .product-img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .product:hover .product-img {
+      transform: scale(1.05);
+    }
+    
+    .product-content {
+      padding: 1.5rem;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark-text);
+    }
+    
+    .product-desc {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+    
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      color: var(--dark-text);
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      display: block;
+      transition: var(--transition);
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f8fafc;
+      color: var(--primary-color);
+      padding-left: 1.2rem;
+    }
+    
+    .dropdown-content a i {
+      margin-right: 0.5rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    section {
+      padding: 4rem 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: inline-block;
+      position: relative;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .contact-container, .about-container {
+      background-color: white;
+      border-radius: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark-text);
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 89, 179, 0.2);
+    }
+    
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .success-message {
+      background-color: #d1fae5;
+      color: #065f46;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .success-message i {
+      margin-right: 0.5rem;
+      color: #10b981;
+    }
+    
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .feature {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-text);
+    }
+    
+    .feature p {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-color);
+      transform: translateX(5px);
+    }
+    
+    .footer-links i {
+      margin-right: 0.5rem;
+      width: 20px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--light-text);
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      nav {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="Container">
-        <div class="header">
-            <div class="top-header">
-               <h1>Nirvana</h1>  
-            <ul>
-                <li>
-                    <a href="links" class="links">learn about us</a>
-                </li>
-                <li>
-                    <a href="links" class="links">pictures of tours</a>
-                </li>
-                <li>
-                    <a href="links" class="links">buy in are store</a>
-                </li>
-            </ul>     
-            </div>
-            <div class="downheader">
-                <div class="leftdown">
-                    <H2>This is the nirvana Website</H2>
-                    <p class="para1">The website of the best band in the world, a unique experience that</p>
-                    <p class="para2">changed the lives of millions of people in the 90s.</p>
-                    <button class="log">Sign up</button>
-                </div>
-                <div class="rightdown">
-                    <img src="fotos/nirvana.foto.jpg" alt="foto de nirvana" class="imagen">
-                </div>
-                
-            </div>
-           
-        </div>
-        <div class="information">
-            <h3 class="Memb">Nirvana Members</h3>
-            <div class="fotos">
-                        <div class="kurt">
-                        <img src="fotos/arton67387-2cd53.jpg" alt="kurt cobain" class="kurtImg" >
-                        <p>Kurt Cobain, Singer</p>
-                    </div>
-                    <div class="kurt">
-                        <img src="fotos/davegrohl.jpg" alt="kurt cobain" class="kurtImg">
-                        <p>Dave Grohl, Drummer</p>
-                    </div>
-                    <div class="kurt">
-                        <img src="fotos/kristnoveselic.jpg" alt="kurt cobain"  class="kurtImg">
-                        <p>Kris Novecelic, Bajist</p>
-                    </div>
-                    <div class="patt">
-                        <img src="fotos/Patsmearrrr.webp" alt="Patsmearrrr"  class="kurtImg">
-                        <p>Pat Smear, Guitarrist</p>
-                    </div>
-                </div>
-            </div>
-            <div class="quotes">
-                <h1 class="shiti">"All my lyrics have been pieces of poetry and the pieces of poetry are taken from poems that commonly have no meaning at first."</h1>
-                <p class="quotesAuthor">Kurt Cobain 1992</p>
-            </div>
-            <div class="whiteBackground">
-                <div class="containerSub">
-                    <div class="SubText">
-                        <h4>Sign Up! to Nirvana.com</h4>
-                    <p class="Pclass"> And get access to all are new features!</p>
-                </div>
-                  
-                    <button class="Btn2">SIGN UP</button>
-                </div>
-            </div>
-            <div class="Bottom">
-                <p class="Pbottom">Copyright © Nirvana 2025</p>
-            </div>
-
-            
-
-           
+  <header>
+    <div class="logo">
+      <i class="fas fa-store-alt"></i>
+      <h1>PuertoAlegre</h1>
     </div>
+    <nav>
+      <a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> Inicio</a>
+      <div class="dropdown">
+        <a href="#"><i class="fas fa-shopping-basket"></i> Productos <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+          <a href="#" onclick="showProducts('carnicos')"><i class="fas fa-drumstick-bite"></i> Cárnicos</a>
+          <a href="#" onclick="showProducts('bebidas')"><i class="fas fa-glass-whiskey"></i> Bebidas</a>
+          <a href="#" onclick="showProducts('basico')"><i class="fas fa-shopping-basket"></i> Básico</a>
+        </div>
+      </div>
+      <a href="#" onclick="showPage('contacto')"><i class="fas fa-envelope"></i> Contáctenos</a>
+      <a href="#" onclick="showPage('sobre')"><i class="fas fa-info-circle"></i> Sobre Nosotros</a>
+      <button class="btn btn-accent" onclick="toggleLogin()" id="loginBtn"><i class="fas fa-user"></i> Iniciar sesión</button>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Bienvenido a PuertoAlegre</h2>
+      <p>Tu tienda de confianza con los mejores productos alimenticios al mejor precio. Calidad y servicio desde 1995.</p>
+      <div>
+        <button class="btn" onclick="showProducts('carnicos')">Ver productos</button>
+        <button class="btn btn-outline" onclick="showPage('contacto')">Contáctanos</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos" style="display: none;">
+    <div class="section-title">
+      <h2>Nuestros Productos</h2>
+    </div>
+    <div id="products-container" class="products-grid"></div>
+  </section>
+
+  <section id="contacto" style="display: none;">
+    <div class="section-title">
+      <h2>Contáctenos</h2>
+    </div>
+    <div class="contact-container">
+      <form onsubmit="enviarMensaje(event)">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ingrese su nombre">
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" required placeholder="Ingrese su correo electrónico">
+        </div>
+        <div class="form-group">
+          <label for="asunto">Asunto:</label>
+          <input type="text" id="asunto" name="asunto" required placeholder="¿Sobre qué desea contactarnos?">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Escriba su mensaje aquí..."></textarea>
+        </div>
+        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+      </form>
+      <div id="mensaje-enviado" class="success-message">
+        <i class="fas fa-check-circle"></i> Gracias por contactarnos. Su mensaje ha sido enviado y nos pondremos en contacto pronto.
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" style="display: none;">
+    <div class="section-title">
+      <h2>Sobre Nosotros</h2>
+    </div>
+    <div class="about-container">
+      <div class="about-content">
+        <p>Ejemplo:PuertoAlegre es una empresa familiar fundada en 1995, dedicada a ofrecer productos alimenticios de la más alta calidad al mejor precio. Nuestro compromiso es con la satisfacción total de nuestros clientes.</p>
+        <p>Con más de 25 años en el mercado, hemos crecido para convertirnos en la tienda de confianza de miles de familias, ofreciendo productos frescos, seleccionados cuidadosamente y con el mejor servicio.</p>
+      </div>
+      
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-award"></i>
+          <h3>Calidad Garantizada</h3>
+          <p>Todos nuestros productos pasan por estrictos controles de calidad para garantizar tu satisfacción.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-truck"></i>
+          <h3>Envío Rápido</h3>
+          <p>Entregamos tus productos en el menor tiempo posible, manteniendo siempre su frescura.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-hand-holding-heart"></i>
+          <h3>Atención Personalizada</h3>
+          <p>Nuestro equipo está siempre disponible para atender tus necesidades y consultas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>PuertoAlegre</h3>
+        <p>Tu tienda de confianza en productos de consumo diario. Calidad y servicio desde 1995.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Enlaces Rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="#" onclick="showPage('home')"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+          <li><a href="#" onclick="showProducts('carnicos')"><i class="fas fa-chevron-right"></i> Productos Cárnicos</a></li>
+          <li><a href="#" onclick="showProducts('bebidas')"><i class="fas fa-chevron-right"></i> Bebidas</a></li>
+          <li><a href="#" onclick="showProducts('basico')"><i class="fas fa-chevron-right"></i> Productos Básicos</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Av. Cerro 123, Ciudad</a></li>
+          <li><a href="tel:+53 54410737"><i class="fas fa-phone-alt"></i> +53 54410737</a></li>
+          <li><a href="jorgito@gmail.com"><i class="fas fa-envelope"></i> jorge@puertoalegre.com</a></li>
+          <li><a href="#" onclick="showPage('contacto')"><i class="fas fa-comment-dots"></i> Formulario de contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2023 PuertoAlegre. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    let loggedIn = false;
+    const productos = {
+      carnicos: [
+        { 
+          nombre: "Carne de Res Premium", 
+          precio: "$12.99", 
+          imagen: "https://images.unsplash.com/photo-1558030006-450675393462?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80", 
+          descripcion: "Corte premium de res, jugoso y tierno. Perfecto para asados.", 
+          badge: "Nuevo"
+        },
+        { 
+          nombre: "Pollo de Granja", 
+          precio: "$8.50", 
+          imagen: "pollo.jfif", 
+          descripcion: "Pollo fresco criado en granjas locales con alimentación natural.", 
+          badge: "Popular"
+        },
+        { 
+          nombre: "Lomo de Cerdo", 
+          precio: "$10.75", 
+          imagen: "lomo de cerdo.jfif", 
+          descripcion: "Lomo de cerdo seleccionado, ideal para hornear o freír.", 
+          badge: "Oferta"
+        }
+      ],
+      bebidas: [
+        { 
+          nombre: "Agua Mineral Natural", 
+          precio: "$1.20", 
+          imagen: "agua.jpg", 
+          descripcion: "Agua mineral natural de manantial, en botella de 1 litro.", 
+          badge: "Eco"
+        },
+        { 
+          nombre: "Jugo de Naranja Natural", 
+          precio: "$3.50", 
+          imagen: "jugo de naranja natural.jfif", 
+          descripcion: "Jugo 100% natural recién exprimido, sin conservantes.", 
+          badge: "Nuevo"
+        },
+        { 
+          nombre: "Vino Tinto Reserva", 
+          precio: "$15.99", 
+          imagen: "vino tinto reserva.jfif", 
+          descripcion: "Vino tinto reserva, añejado en barricas de roble.", 
+          badge: "Premium"
+        }
+      ],
+      basico: [
+        { 
+          nombre: "Arroz Integral", 
+          precio: "$3.20", 
+          imagen: "ARROZ.jfif", 
+          descripcion: "Arroz integral de grano largo, rico en fibra y nutrientes.", 
+          badge: "Saludable"
+        },
+        { 
+          nombre: "Frijoles Negros", 
+          precio: "$2.80", 
+          imagen: "frijoles.jfif", 
+          descripcion: "Frijoles negros seleccionados, alta calidad nutricional.", 
+          badge: "Tradicional"
+        },
+        { 
+          nombre: "Aceite de Oliva Extra Virgen", 
+          precio: "$7.99", 
+          imagen: "aceite oliva.jfif", 
+          descripcion: "Aceite de oliva extra virgen, primera prensada en frío.", 
+          badge: "Premium"
+        }
+      ]
+    };
+
+    function toggleLogin() {
+      loggedIn = !loggedIn;
+      const loginBtn = document.getElementById('loginBtn');
+      if (loggedIn) {
+        loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Cerrar sesión';
+        showNotification('¡Bienvenido a PuertoAlegre!', 'success');
+      } else {
+        loginBtn.innerHTML = '<i class="fas fa-user"></i> Iniciar sesión';
+        showNotification('Sesión cerrada correctamente', 'info');
+      }
+      showPage('home');https
+    }
+
+    function showPage(page) {
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(page).style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Animación para las secciones
+      if (page !== 'home') {
+        const section = document.getElementById(page);
+        section.style.animation = 'fadeInUp 0.8s ease';
+      }
+    }
+
+    function showProducts(tipo) {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '';
+      
+      productos[tipo].forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+          <img src="${p.imagen}" alt="${p.nombre}" class="product-img">
+          <div class="product-content">
+            <h3 class="product-title">${p.nombre}</h3>
+            <p class="product-desc">${p.descripcion}</p>
+            <div class="product-footer">
+              <span class="product-price">${p.precio}</span>
+              <button class="btn btn-accent"><i class="fas fa-cart-plus"></i> Agregar</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      
+      showPage('productos');
+    }
+
+    function enviarMensaje(e) {
+      e.preventDefault();
+      const successMsg = document.getElementById('mensaje-enviado');
+      successMsg.style.display = 'block';
+      e.target.reset();
+      
+      // Ocultar mensaje después de 5 segundos
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 5000);
+    }
+    
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+        ${message}
+      `;
+      document.body.appendChild(notification);
+      
+      // Mostrar notificación
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      // Ocultar después de 3 segundos
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+
+    // Mostrar la página de inicio al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage('home');
+      
+      // Añadir estilos para notificaciones dinámicas
+      const style = document.createElement('style');
+      style.textContent = `
+        .notification {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 15px 25px;
+          border-radius: 8px;
+          color: white;
+          font-weight: 500;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          transform: translateX(150%);
+          transition: transform 0.3s ease;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .notification.show {
+          transform: translateX(0);
+        }
+        .notification.success {
+          background-color: #10b981;
+        }
+        .notification.info {
+          background-color: #3b82f6;
+        }
+        .notification i {
+          font-size: 1.2rem;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
 </body>
 </html>
